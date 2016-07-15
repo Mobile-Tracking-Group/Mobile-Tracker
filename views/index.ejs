@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <title>Mobile Tracker</title>
+    <link rel="stylesheet" href="/bootstrap.min.css">
+    <link rel="stylesheet" href="/shop-homepage.css">
+    <script src="/jquery.min.js"></script>
+    <script src="/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+
+<body style="background-color: lightgreen;">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+                <a class="navbar-brand">MOBILE TRACKER</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/sign">Signup</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+
+                        <li><a href="/about">About</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        </div>
+    </nav>
+
+    <div class="row" style="padding-top: 100px">
+        <div class="col-lg-6 col-md-offset-3">
+
+
+            <div class="panel panel-success">
+                <div class="panel-heading"><strong>LOGIN </strong></div>
+                <div class="panel-body">
+
+
+                    <form action="/valid" method="post" accept-charset="utf-8">
+                        <div class="form-group">
+                            <div class="well well-sm">
+                                <input type="string" class="form-control" name="user" placeholder="Username" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="well well-sm">
+
+                                <input type="password" class="form-control" name="pass" placeholder="Password" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-block btn-success">Login <span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button><br>
+                        <!-- <h5 style="text-align: center;"><a href="/forgot">Forgot Password?</a></h5> -->
+                    </form>
+
+                    <% if(title != "") { %>
+                    <br>
+                    <div class="alert alert-danger" role="alert">
+                    <h6 style="color: red; text-align: center;"><%= title %></h6>
+                    </div>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

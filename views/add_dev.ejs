@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <title>Mobile Tracker</title>
+    <link rel="stylesheet" href="/bootstrap.min.css">
+    <link rel="stylesheet" href="/shop-homepage.css">
+    <script src="/jquery.min.js"></script>
+    <script src="/bootstrap.min.js"></script>
+</head>
+
+
+<body style="background-color: lightblue;">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+        <a class="navbar-text" href="/"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span></a>
+            <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+                <a class="navbar-brand">MOBILE TRACKER</a>
+                <a class="navbar-text">Welcome, <%= username %> </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/logout"><span class="glyphicon glyphicon-off" aria-hidden="true"></span></a></li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+
+                        <li><a href="/about">About</a></li>
+
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Add Device </div>
+            <div class="panel-body">
+
+
+                <form action="/add_dev" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label>Upload Image</label>
+                        <input type="file" name="file" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="string" class="form-control" name="name" placeholder="Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Operating System</label>
+                        <input type="string" class="form-control" name="os" placeholder="Operating System" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Mac Address</label>
+                        <input type="string" class="form-control" name="mac" placeholder="Mac Address" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Sim card Status</label>
+                        <input type="string" class="form-control" name="sim" placeholder="Sim card Status" required>
+                    </div>
+                    <div class="form-group">
+                        <label>IMEI Number</label>
+                        <input type="string" class="form-control" name="imei" placeholder="IMEI Number" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Current Location</label>
+                        <input type="string" class="form-control" name="location" placeholder="Current Location" required>
+                    </div>
+                    <div class="form-group">
+                        <label>ID</label>
+                        <input type="string" class="form-control" name="id" placeholder="ID" required>
+                    </div>
+                    <button type="submit" class="btn btn-block btn-primary"> Save <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
+                    </button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

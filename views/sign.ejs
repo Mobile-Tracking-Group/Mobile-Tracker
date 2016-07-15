@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <title>Mobile Tracker</title>
+    <link rel="stylesheet" href="/bootstrap.min.css">
+    <link rel="stylesheet" href="/shop-homepage.css">
+    <script src="/jquery.min.js"></script>
+    <script src="/bootstrap.min.js"></script>
+</head>
+
+
+<body style="background-color: lightblue;">
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+      </button>
+                <a class="navbar-brand" href="/">MOBILE TRACKER</a>
+
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/">Login</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+
+                        <li><a href="/about">About</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="row" style="padding-top: 100px">
+        <div class="col-lg-6 col-md-offset-3">
+
+            <div class="panel panel-primary">
+                <div class="panel-heading"><strong>SIGN UP </strong></div>
+                <div class="panel-body">
+
+                    <form method="post" action="/create" accept-charset="utf-8">
+
+                        <div class="form-group">
+                            <label="name">Username </label>
+                                <input type="text" class="form-control" name="username" required>
+                        </div>
+                        <div class="form-group">
+                            <label="name">Password </label>
+                                <input type="password" pattern=".{6,}" required title="6 characters minimum" class="form-control" name="password" required>
+                        </div>
+                        <div class="form-group">
+                            <label="name">Confirm Password </label>
+                                <input type="password" pattern=".{6,}" required title="6 characters minimum" class="form-control" name="cpassword" required>
+                        </div>
+                        <div class="form-group">
+                            <label="name">Email </label>
+                                <input type="email" class="form-control" name="email" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-block btn-primary">Sign Up <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                        </button>
+
+                        <% if(errormsg != "") { %>
+                    <br>
+                    <div class="alert alert-danger" role="alert">
+                    <h6 style="color: red; text-align: center;"><%= errormsg %></h6>
+                    </div>
+                    <% } %>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
+

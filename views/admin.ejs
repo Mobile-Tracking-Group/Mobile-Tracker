@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <title>Mobile Tracker</title>
+    <link rel="stylesheet" href="/bootstrap.min.css">
+    <link rel="stylesheet" href="/shop-homepage.css">
+    <script src="/jquery.min.js"></script>
+    <script src="/bootstrap.min.js"></script>
+</head>
+
+
+<body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+
+        <div class="container">
+        <a class="navbar-text" href="/"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span></a>
+            <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+                <a class="navbar-brand">MOBILE TRACKER</a>
+                <a class="navbar-text">Welcome, <%= username %></a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/logout"><span class="glyphicon glyphicon-off" aria-hidden="true"></span></a></li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/about">About</a></li>
+                        <li><a href="/edit">Change Password</a></li>
+                    </ul>
+            </ul>
+            </li>
+
+            </ul>
+        </div>
+    </nav>
+
+
+
+
+    <div class="container">
+
+        <%var x = 0; device1.forEach( function ( device ){  if(device.device_user == username) { x ++ }}); %>
+        <% if(x>0) { %>
+        <div class="alert alert-info" role="alert" style=" border-left: 6px solid #337ab7; ">
+            <h4><strong>Devices in Hand</strong></h4>
+        </div>
+        <div class="row">
+            
+
+            <div class="col-md-12">
+            
+                <table class="table table-hover">
+                    <tr class="info">
+
+                        <th>Device Image</th>
+                        <th>Device Name</th>
+                        <th>OS</th>
+                        <th>Device ID</th>
+                    </tr>
+                    <% device1.forEach( function ( device ){  if(device.device_user == username) { %>
+                        <tr>
+                            <td>
+                            <% images.forEach( function ( image ){  if(device.device_name == image.device) { %>
+                                <img src="<%= image.path %>" onerror="this.src='default.png'" style="width:204px;height:128px;" >
+                            <% }}); %>
+                            </td>
+                            <td>
+                                <%= device.device_name %>
+                            </td>
+                            <td>
+
+                                <%= device.device_os %><br><br><br>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Request for OS Update  
+                                     <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></button>
+
+                            </td>
+                            <td>
+                                <%= device.device_id %><br><br><br>
+                                    <a href="/return/<%= device._id %>" class="btn btn-danger">Return</a>
+                            </td>
+                        </tr>
+                        <% }}); %>
+                </table>
+                <% } else {%>
+                <div class="row">
+                <div class="col-md-12">
+                <div class="alert alert-danger" role="alert" style=" border-left: 6px solid #a94442; ">
+                <center><h4><strong>No Devices in Hand</strong></h4></center>
+                </div>
+                <% } %>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Request for OS Update</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            <form action="/osmail" method="post" accept-charset="utf-8">
+                                <div class="form-group">
+                                    <label="name">OS required</label="name">
+                                    <input type="string" class="form-control" name="os">
+                                </div>
+                                <div class="form-group">
+                                    <label="name">Purpose </label="name">
+                                    <input type="string" class="form-control" name="purpose">
+                                </div>
+                                <button type="submit" class="btn btn-success">Send</button>
+                            </form>
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <div class="alert alert-info" role="alert" style=" border-left: 6px solid #337ab7; ">
+            <div class="col-lg-6">
+                <h4><strong>Device List</strong></h4>
+            </div>
+            <form action="/search" method="post">
+                <div class="col-lg-6">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search for..." name="searchip">
+                        <span class="input-group-btn">
+        <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                        </span>
+                    </div>
+                </div>
+            </form>
+            <br><br>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <% devices.forEach( function ( device ){ %>
+                    <div class="col-sm-4 col-lg-4 col-md-4">
+                        <div class="thumbnail">
+                                <% images.forEach( function ( image ){  if(device.device_name == image.device) { %>
+                                <img src="<%= image.path %>" onerror="this.src='default.png'" style="width:204px;height:128px;">
+                                <% }}); %>
+                            <div class="caption">
+                                <h4><a href="/info/<%= device._id %>"><%= device.device_name %></a></h4>
+                                <h5>Operating System: <%= device.device_os %></h5>
+                                <h5>Device ID: <%= device.device_id %></h5>
+                                    <% if(device.device_availability == "A"){ %>
+                                    <a href="/collect/<%= device._id %>" class="btn btn-block btn-success">Collect</a></p>
+                                    <% }  %>
+                            </div>
+                            <div class="ratings">
+                                <p>
+                                    <% if(device.device_availability == "A"){ %>
+                                        <p style="color : green">Device Availability:
+                                            <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span></p>
+
+                                        <% } else if(device.device_availability == "U") { %>
+                                            <p style="color : red">Device Availability:
+                                                <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+                                                <%= device.device_user  %>
+                                            </p>
+                                            <% } else{ %>
+                                             <p style="color : red">Device Availability:
+                                                <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+                                                 Reserved
+                                            </p>
+                                            <% } %>
+                                </p>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <% }); %>
+
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

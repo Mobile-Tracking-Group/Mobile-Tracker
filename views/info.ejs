@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Mobile Tracker</title>
+    <link rel="stylesheet" href="/bootstrap.min.css">
+    <link rel="stylesheet" href="/shop-homepage.css">
+    <script src="/jquery.min.js"></script>
+    <script src="/bootstrap.min.js"></script>
+</head>
+
+<body style="background-color: lightblue;">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        
+        <div class="container">
+        <a class="navbar-text" href="/"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span></a>
+            <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+                <a class="navbar-brand">MOBILE TRACKER</a>
+                <a class="navbar-text">Welcome, <%= logged %></a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/logout"><span class="glyphicon glyphicon-off" aria-hidden="true"></span></a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/about">About</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <% images.forEach( function ( image ){  if(devices.device_name == image.device) { %>
+                <img src="/<%= image.path %>" onerror="this.src='/default.png'" style="width:204px;height:128px;">
+                <% }}); %>
+            </div>
+            <div class="col-md-9">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <%= devices.device_name %>
+                    </div>
+                    <div class="panel-body">
+                        <h4>Device Information</h4>
+                        <p>Operating System:
+                            <%= devices.device_os %><br>Device ID:
+                                <%= devices.device_id %><br>Sim card status:
+                                    <%= devices.device_sim %><br> IMEI Number:
+                                        <%= devices.device_imei %><br> Device Mac ID:
+                                            <%= devices.device_mac %><br>Current Location:
+                                                <%= devices.device_location %>
+                        </p>
+                        <div class="ratings">
+                            <% if(devices.device_availability == "A"){ %>
+                                <p class="pull-right"> <a href="/collect/<%= devices._id %>" class="btn btn-success">Collect</a></p>
+                                   <p style="color: green"> Device is Available <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+                                    </p>
+                                    <%  } else if(devices.device_availability == "U") { %>
+                                        <p style="color:red"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span> Device Currently with
+                                                <%= devices.device_user %>
+                                            </p>
+                                            <% } else { %>
+                                            <p style="color:red"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span> The device is currently reserved
+                                            </p>
+                                             <% } %>
+
+                        </div>
+                    </div>
+                </div>
+                <% if(devices.device_availability == "U"){ %>
+                    <div class="well" style=" border-left: 6px solid #337ab7; ">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4><a href="#">USER INFO</a></h4>
+                                <p>User :
+                                    <%= devices.device_user %> <br> User Email:
+                                        <%= email %>
+                                </p>
+                                <p class="text-right"> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Request for Return  <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></button></p>
+                            </div>
+                        </div>
+                        <div class="modal fade" id="myModal" role="dialog">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Return Request</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>
+                                            <form action="/returnmail/<%= email %>" method="post" accept-charset="utf-8">
+                                                <div class="form-group">
+                                                    <label="name">Date </label="name">
+                                                    <input type="string" class="form-control" name="date">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label="name">Purpose </label="name">
+                                                    <input type="string" class="form-control" name="purpose">
+                                                </div>
+                                                <button type="submit" class="btn btn-success">Send</button>
+                                            </form>
+                                        </p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
+            </div>
+</body>
+
+</html>

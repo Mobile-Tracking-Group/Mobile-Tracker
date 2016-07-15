@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <title>Mobile Tracker</title>
+    <link rel="stylesheet" href="/bootstrap.min.css">
+    <link rel="stylesheet" href="/shop-homepage.css">
+    <script src="/jquery.min.js"></script>
+    <script src="/bootstrap.min.js"></script>
+</head>
+
+
+<body style="background-color: lightblue;">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        
+        <div class="container">
+            <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+                <a class="navbar-brand">MOBILE TRACKER</a>
+                <a class="navbar-text">Welcome, <%= username %></a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/logout"><span class="glyphicon glyphicon-off" aria-hidden="true"></span></a></li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+
+                        <li><a href="/about">About</a></li>
+                        <li><a href="/edit">Change Password</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+    <div class="row">
+     <div class="col-md-6">
+                <a href="/newdev" class="btn btn-block btn-primary">Add Device  <span class="glyphicon glyphicon-phone" aria-hidden="true"></span></a>
+
+            </div>
+            <div class="col-md-6">
+                <a href="/admin" class="btn btn-block btn-primary">Manage Your Devices  <span class="glyphicon glyphicon-phone" aria-hidden="true"></span></a>
+
+            </div>
+        </div>
+        <br>
+
+       
+        <div class="row">
+           
+
+            <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading"><strong> Device Status </strong></div>
+                <div class="panel-body">
+                <table class="table table-striped">
+                    <tr >
+
+                        <th>Device Name</th>
+                        <th>Operating System</th>
+                        <th>Device ID</th>
+                        <th>Device User</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    <% device1.forEach( function ( device ){ %>
+                        <tr>
+                            <td>
+                                <%= device.device_name %>
+                            </td>
+                            <td>
+                                <%= device.device_os %><br><br><br>
+                            </td>
+                            <td>
+                                <%= device.device_id %><br><br><br>
+                            </td>
+                            <td>
+                                <%= device.device_user %><br><br><br>
+                            </td>
+                            <td>
+                                <a href="/delete/<%= device._id %>" class="btn btn-danger">Remove <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                            </td>
+                            <td>
+                                <% if(device.device_availability == 'A') { %>
+                                <a href="/block/<%= device._id %>" class="btn btn-danger">Block <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                                <% } else if(device.device_availability == 'B') {%>
+                                <a href="/unblock/<%= device._id %>" class="btn btn-success">Unblock</a>
+                                <% } else {%>
+                                <button type="button" class="btn btn-default" disabled="disabled">Device in Use</button>
+                                <% } %>
+                            </td>
+                        </tr>
+                        <% }); %>
+                </table>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
